@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
+  <title>HR.MERGE_ROW_COUNT - coverage report</title>
+  <link href="coverage.css" media="all" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <h1>HR.MERGE_ROW_COUNT</h1>
+  <div class="report_table_wrapper">
+    <table class='report' id='report_table'>
+      <thead>
+        <tr>
+          <th class="left_align">Name</th>
+          <th class="right_align">Total Lines</th>
+          <th class="right_align">Analyzed Lines</th>
+          <th class="left_align">Total Coverage</th>
+          <th class="left_align">Code Coverage</th>
+        </tr>
+      </thead>
+      <tbody>
+                <tr class="all_schemas all_coverage HR_schema 100">
+          <td class="left_align"><a href="HR-MERGE_ROW_COUNT.html">HR.MERGE_ROW_COUNT</a></td>
+          <td class='right_align'><tt>62</tt></td>
+          <td class='right_align'><tt>34</tt></td>
+          <td class="left_align"><div class="percent_graph_legend"><tt class=''>98.39%</tt></div>
+        <div class="percent_graph">
+          <div class="covered" style="width:98px"></div>
+          <div class="uncovered" style="width:2px"></div>
+        </div></td>
+          <td class="left_align"><div class="percent_graph_legend"><tt class=''>97.06%</tt></div>
+        <div class="percent_graph">
+          <div class="covered" style="width:97px"></div>
+          <div class="uncovered" style="width:3px"></div>
+        </div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div> 
+  <table class="details">
+      <tr class="uncovered" data-hits="0">
+        <td><pre><a name="line1">1 </a>PACKAGE BODY merge_row_count IS</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line2">2 </a></pre></td>
+      </tr>
+      <tr class="marked" data-hits="1">
+        <td><pre><a name="line3">3 </a>  GC_RESET_VALUE  PLS_INTEGER := NULL;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="1">
+        <td><pre><a name="line4">4 </a>  g_updated_rows  PLS_INTEGER := GC_RESET_VALUE;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="1">
+        <td><pre><a name="line5">5 </a>  g_inserted_rows PLS_INTEGER := GC_RESET_VALUE;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="1">
+        <td><pre><a name="line6">6 </a>  g_deleted_rows  PLS_INTEGER := GC_RESET_VALUE;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="1">
+        <td><pre><a name="line7">7 </a>  g_need_reset    BOOLEAN := FALSE;</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line8">8 </a></pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line9">9 </a></pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line10">10 </a>  PROCEDURE reset_counters IS</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line11">11 </a>    BEGIN</pre></td>
+      </tr>
+      <tr class="marked" data-hits="10">
+        <td><pre><a name="line12">12 </a>      g_updated_rows  := GC_RESET_VALUE;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="10">
+        <td><pre><a name="line13">13 </a>      g_inserted_rows := GC_RESET_VALUE;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="10">
+        <td><pre><a name="line14">14 </a>      g_deleted_rows  := GC_RESET_VALUE;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="10">
+        <td><pre><a name="line15">15 </a>    END;</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line16">16 </a></pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line17">17 </a>  PROCEDURE modify_counter( counter IN OUT NOCOPY PLS_INTEGER ) IS</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line18">18 </a>    BEGIN</pre></td>
+      </tr>
+      <tr class="marked" data-hits="200065">
+        <td><pre><a name="line19">19 </a>       IF g_need_reset THEN</pre></td>
+      </tr>
+      <tr class="marked" data-hits="10">
+        <td><pre><a name="line20">20 </a>         g_need_reset := FALSE;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="10">
+        <td><pre><a name="line21">21 </a>         reset_counters();</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line22">22 </a>       END IF;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="200065">
+        <td><pre><a name="line23">23 </a>      counter := COALESCE( counter + 1, 1 );</pre></td>
+      </tr>
+      <tr class="marked" data-hits="200065">
+        <td><pre><a name="line24">24 </a>    END;</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line25">25 </a></pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line26">26 </a>  FUNCTION ins RETURN INTEGER IS</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line27">27 </a>    BEGIN</pre></td>
+      </tr>
+      <tr class="marked" data-hits="25">
+        <td><pre><a name="line28">28 </a>      modify_counter( g_inserted_rows );</pre></td>
+      </tr>
+      <tr class="marked" data-hits="25">
+        <td><pre><a name="line29">29 </a>      RETURN g_inserted_rows;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="25">
+        <td><pre><a name="line30">30 </a>    END;</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line31">31 </a></pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line32">32 </a>  FUNCTION upd RETURN INTEGER IS</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line33">33 </a>    BEGIN</pre></td>
+      </tr>
+      <tr class="marked" data-hits="200028">
+        <td><pre><a name="line34">34 </a>      modify_counter( g_updated_rows );</pre></td>
+      </tr>
+      <tr class="marked" data-hits="200028">
+        <td><pre><a name="line35">35 </a>      RETURN g_updated_rows;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="200028">
+        <td><pre><a name="line36">36 </a>    END;</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line37">37 </a></pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line38">38 </a>  FUNCTION del RETURN INTEGER IS</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line39">39 </a>    BEGIN</pre></td>
+      </tr>
+      <tr class="marked" data-hits="12">
+        <td><pre><a name="line40">40 </a>      modify_counter( g_deleted_rows );</pre></td>
+      </tr>
+      <tr class="marked" data-hits="12">
+        <td><pre><a name="line41">41 </a>      RETURN g_deleted_rows;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="12">
+        <td><pre><a name="line42">42 </a>    END;</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line43">43 </a></pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line44">44 </a>  FUNCTION get_inserted( sql_row_count INTEGER DEFAULT NULL ) RETURN INTEGER IS</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line45">45 </a>    BEGIN</pre></td>
+      </tr>
+      <tr class="marked" data-hits="4">
+        <td><pre><a name="line46">46 </a>      g_need_reset := TRUE;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="4">
+        <td><pre><a name="line47">47 </a>      RETURN COALESCE( g_inserted_rows, sql_row_count - g_updated_rows );</pre></td>
+      </tr>
+      <tr class="marked" data-hits="4">
+        <td><pre><a name="line48">48 </a>    END;</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line49">49 </a></pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line50">50 </a>  FUNCTION get_updated( sql_row_count INTEGER DEFAULT NULL ) RETURN INTEGER IS</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line51">51 </a>    BEGIN</pre></td>
+      </tr>
+      <tr class="marked" data-hits="4">
+        <td><pre><a name="line52">52 </a>      g_need_reset := TRUE;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="4">
+        <td><pre><a name="line53">53 </a>      RETURN COALESCE( g_updated_rows, sql_row_count - g_inserted_rows ) - COALESCE( g_deleted_rows, 0 );</pre></td>
+      </tr>
+      <tr class="marked" data-hits="4">
+        <td><pre><a name="line54">54 </a>    END;</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line55">55 </a></pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line56">56 </a>  FUNCTION get_deleted( sql_row_count INTEGER DEFAULT NULL ) RETURN INTEGER IS</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line57">57 </a>    BEGIN</pre></td>
+      </tr>
+      <tr class="marked" data-hits="4">
+        <td><pre><a name="line58">58 </a>      g_need_reset := TRUE;</pre></td>
+      </tr>
+      <tr class="marked" data-hits="4">
+        <td><pre><a name="line59">59 </a>      RETURN COALESCE( g_deleted_rows, 0 );</pre></td>
+      </tr>
+      <tr class="marked" data-hits="4">
+        <td><pre><a name="line60">60 </a>    END;</pre></td>
+      </tr>
+      <tr class="inferred" >
+        <td><pre><a name="line61">61 </a></pre></td>
+      </tr>
+      <tr class="marked" data-hits="1">
+        <td><pre><a name="line62">62 </a>END;</pre></td>
+      </tr>
+  </table>
+</body>
+</html>
