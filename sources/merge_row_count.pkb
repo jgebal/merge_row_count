@@ -52,18 +52,27 @@ CREATE OR REPLACE PACKAGE BODY merge_row_count IS
     END;
 
   FUNCTION ins RETURN INTEGER IS
+$IF DBMS_DB_VERSION.VER_LE_11=FALSE $THEN
+    PRAGMA UDF;
+$END
     BEGIN
       modify_counter( g_inserted_rows );
       RETURN g_inserted_rows;
     END;
 
   FUNCTION upd RETURN INTEGER IS
+$IF DBMS_DB_VERSION.VER_LE_11=FALSE $THEN
+    PRAGMA UDF;
+$END
     BEGIN
       modify_counter( g_updated_rows );
       RETURN g_updated_rows;
     END;
 
   FUNCTION del RETURN INTEGER IS
+$IF DBMS_DB_VERSION.VER_LE_11=FALSE $THEN
+    PRAGMA UDF;
+$END
     BEGIN
       modify_counter( g_deleted_rows );
       RETURN g_deleted_rows;
